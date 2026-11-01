@@ -1,0 +1,53 @@
+
+#include <stdio.h>
+#include <string.h>
+
+#define SIZE 1000
+
+char queue[SIZE][50];
+int front = 0, rear = -1;
+
+// Insert into queue
+void enqueue(char str[]) {
+    if(rear == SIZE - 1)
+        return;
+
+    strcpy(queue[++rear], str);
+}
+
+// Delete from queue
+void dequeue(char str[]) {
+    strcpy(str, queue[front++]);
+}
+
+int main() {
+    int n, i;
+    char temp[50], s0[50], s1[50];
+
+    printf("Enter N: ");
+    scanf("%d", &n);
+
+    enqueue("1");
+
+    printf("Binary numbers from 1 to %d:\n", n);
+
+    for(i = 1; i <= n; i++) {
+
+        // Remove front element
+        dequeue(temp);
+
+        printf("%s ", temp);
+
+        // Append 0
+        strcpy(s0, temp);
+        strcat(s0, "0");
+        enqueue(s0);
+
+        // Append 1
+        strcpy(s1, temp);
+        strcat(s1, "1");
+        enqueue(s1);
+    }
+
+    return 0;
+}
