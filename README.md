@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-// Function to insert an element into a sorted array.
-// Returns the updated number of elements in the array.
+
 int insertIntoSorted(int arr[], int n, int capacity, int key) {
     // 1. Check if the array has reached its maximum capacity
     if (n >= capacity) {
@@ -11,16 +10,16 @@ int insertIntoSorted(int arr[], int n, int capacity, int key) {
 
     int i = n - 1;
 
-    // 2. Start from the right and shift elements greater than 'key' one position to the right
+    
     while (i >= 0 && arr[i] > key) {
         arr[i + 1] = arr[i];
         i--;
     }
 
-    // 3. Insert the key into the vacant position
+    
     arr[i + 1] = key;
 
-    // 4. Return the new size of the array
+    
     return n + 1;
 }
 
