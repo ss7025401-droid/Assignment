@@ -1,0 +1,105 @@
+
+#include <stdio.h>
+
+#define SIZE 100
+
+int queue[SIZE], stack[SIZE];
+int front = -1, rear = -1;
+int top = -1;
+
+// Insert element into queue
+void enqueue(int x) {
+    if(rear == SIZE - 1) {
+        printf("Queue Overflow\n");
+        return;
+    }
+
+    if(front == -1)
+        front = 0;
+
+    queue[++rear] = x;
+}
+
+// Delete element from queue
+int dequeue() {
+    if(front == -1 || front > rear) {
+        printf("Queue Underflow\n");
+        return -1;
+    }
+
+    return queue[front++];
+}
+
+// Push element into stack
+void push(int x) {
+    if(top == SIZE - 1) {
+        printf("Stack Overflow\n");
+        return;
+    }
+
+    stack[++top] = x;
+}
+
+// Pop element from stack
+int pop() {
+    if(top == -1) {
+        printf("Stack Underflow\n");
+        return -1;
+    }
+
+    return stack[top--];
+}
+
+// Reverse queue using stack
+void reverse() {
+    int x;
+
+    // Step 1: Queue to Stack
+    while(front != -1 && front <= rear) {
+        x = dequeue();
+        push(x);
+    }
+
+    // Step 2: Stack to Queue
+    while(top != -1) {
+        x = pop();
+        enqueue(x);
+    }
+}
+
+// Display queue
+void display() {
+    int i;
+
+    printf("Queue elements: ");
+
+    for(i = front; i <= rear; i++) {
+        printf("%d ", queue[i]);
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int n, i, x;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter queue elements: ");
+
+    for(i = 0; i < n; i++) {
+        scanf("%d", &x);
+        enqueue(x);
+    }
+
+    printf("\nOriginal Queue:\n");
+    display();
+
+    reverse();
+
+    printf("\nReversed Queue:\n");
+    display();
+
+    return 0;
+}
